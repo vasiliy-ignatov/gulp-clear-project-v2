@@ -6,6 +6,7 @@ const browsersync = require('browser-sync').create()
 const jade = require('gulp-pug')
 const stylus = require('gulp-stylus')
 const concat = require('gulp-concat')
+const plumber = require('gulp-plumber')
 
 const PATHS = {
 	MODULES:'./src/modules',
@@ -33,6 +34,7 @@ function browserSync () {
 
 function css() {
 	return src(PATHS.MODULES + '/*.styl')
+		.pipe(plumber())
 		.pipe(stylus())
 		.pipe(concat('main.css'))
 		.pipe(dest(PATHS.OUT + '/css/'))
